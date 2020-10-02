@@ -8,6 +8,9 @@ import (
 	ctrlrt "sigs.k8s.io/controller-runtime"
 	flag "github.com/spf13/pflag"
 	svcresource "github.com/aws/aws-controllers-k8s/services/fargate/pkg/resource"
+	svctypes "github.com/aws/aws-controllers-k8s/services/fargate/apis/v1alpha1"
+
+	_ "github.com/aws/aws-controllers-k8s/services/fargate/pkg/resource/cluster"
 )
 
 var (
@@ -19,7 +22,7 @@ var (
 
 func init() {
 	_ = clientgoscheme.AddToScheme(scheme)
-	//_ = svctypes.AddToScheme(scheme)
+	_ = svctypes.AddToScheme(scheme)
 }
 
 func main() {

@@ -7,15 +7,15 @@ import (
 
 // BucketSpec defines the desired state of Bucket
 type ClusterSpec struct {
-	ACL                        *string                    `json:"acl,omitempty"`
+	//ACL                        *string                    `json:"acl,omitempty"`
 	//CreateBucketConfiguration  *CreateBucketConfiguration `json:"createBucketConfiguration,omitempty"`
-	GrantFullControl           *string                    `json:"grantFullControl,omitempty"`
-	GrantRead                  *string                    `json:"grantRead,omitempty"`
-	GrantReadACP               *string                    `json:"grantReadACP,omitempty"`
-	GrantWrite                 *string                    `json:"grantWrite,omitempty"`
-	GrantWriteACP              *string                    `json:"grantWriteACP,omitempty"`
+	//GrantFullControl           *string                    `json:"grantFullControl,omitempty"`
+	//GrantRead                  *string                    `json:"grantRead,omitempty"`
+	//GrantReadACP               *string                    `json:"grantReadACP,omitempty"`
+	//GrantWrite                 *string                    `json:"grantWrite,omitempty"`
+	//GrantWriteACP              *string                    `json:"grantWriteACP,omitempty"`
 	Name                       *string                    `json:"name,omitempty"`
-	ObjectLockEnabledForBucket *bool                      `json:"objectLockEnabledForBucket,omitempty"`
+	//ObjectLockEnabledForBucket *bool                      `json:"objectLockEnabledForBucket,omitempty"`
 }
 
 // BucketStatus defines the observed state of Bucket
@@ -23,7 +23,7 @@ type ClusterStatus struct {
 	// All CRs managed by ACK have a common `Status.ACKResourceMetadata` member
 	// that is used to contain resource sync state, account ownership,
 	// constructed ARN for the resource
-	ACKResourceMetadata *ackv1alpha1.ResourceMetadata `json:"ackResourceMetadata"`
+	//ACKResourceMetadata *ackv1alpha1.ResourceMetadata `json:"ackResourceMetadata"`
 	// All CRS managed by ACK have a common `Status.Conditions` member that
 	// contains a collection of `ackv1alpha1.Condition` objects that describe
 	// the various terminal states of the CR and its backend AWS service API
