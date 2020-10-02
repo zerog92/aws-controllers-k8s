@@ -25,7 +25,7 @@ func (r *resource) Identifiers() acktypes.AWSResourceIdentifiers {
 		ARN:            &arn,
 		OwnerAccountID: &owner,
 	}
-	if r.ko.Status.ACKResourceMetadata == nil {
+	if r== nil || r.ko == nil || r.ko.Status.ACKResourceMetadata == nil {
 		return &resourceIdentifiers{
 			meta: &meta,
 		}
