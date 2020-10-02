@@ -3,6 +3,7 @@ package main
 import (
 	ackrt "github.com/aws/aws-controllers-k8s/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime"
+	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
 	"os"
 	ctrlrt "sigs.k8s.io/controller-runtime"
 	flag "github.com/spf13/pflag"
@@ -15,6 +16,11 @@ var (
 	scheme             = runtime.NewScheme()
 	setupLog           = ctrlrt.Log.WithName("setup")
 )
+
+func init() {
+	_ = clientgoscheme.AddToScheme(scheme)
+	//_ = svctypes.AddToScheme(scheme)
+}
 
 func main() {
 
