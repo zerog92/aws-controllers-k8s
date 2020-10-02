@@ -61,6 +61,9 @@ func (d *resourceDescriptor) Equal(
 	ac := a.(*resource)
 	bc := b.(*resource)
 	opts := cmpopts.EquateEmpty()
+	if ac == nil || bc == nil {
+		return false
+	}
 	return cmp.Equal(ac.ko, bc.ko, opts)
 }
 
