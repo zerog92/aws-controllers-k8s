@@ -97,6 +97,9 @@ func (rm *resourceManager) Update(
 	diffReporter *ackcompare.Reporter,
 ) (acktypes.AWSResource, error) {
 	managerLog.Info("Update resource")
+	if resDesired == nil || resLatest == nil {
+		return nil, nil
+	}
 	desired := rm.concreteResource(resDesired)
 	latest := rm.concreteResource(resLatest)
 	if desired.ko == nil || latest.ko == nil {
