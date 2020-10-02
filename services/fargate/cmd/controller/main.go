@@ -30,13 +30,22 @@ func main() {
 		os.Exit(1)
 	}
 
-	mgr, _ := ctrlrt.NewManager(ctrlrt.GetConfigOrDie(), ctrlrt.Options{
+	mgr, err := ctrlrt.NewManager(ctrlrt.GetConfigOrDie(), ctrlrt.Options{
 		Scheme:             scheme,
 		Port:               ackCfg.BindPort,
 		MetricsBindAddress: ackCfg.MetricsAddr,
 		LeaderElection:     ackCfg.EnableLeaderElection,
 		LeaderElectionID:   awsServiceAPIGroup,
 	})
+	if err != nil {
+		setupLog.Error(
+			err, "unable to create controller manager",
+			"aws.service", awsServiceAlias,
+		)
+		os.Exit(1)
+	}
+
+	stopChan := ctrlrt.SetupSignalHandler()
 
 	setupLog.Info(
 		"initializing service controller",
@@ -49,5 +58,12 @@ func main() {
 		"starting manager",
 		"aws.service", awsServiceAlias,
 	)
+	if err := mgr.Start(stopChan); err != nil {
+		setupLog.Error(
+			err, "unable to start controller manager",
+			"aws.service", awsServiceAlias,
+		)
+		os.Exit(1)
+	}
 
 }
