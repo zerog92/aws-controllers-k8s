@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  generateName: ack-pr-
+  labels:
+    project: ack-fargate-controller
+    pipeline.openshift.io/started-by: olg
+  annotations:
+    pipeline.openshift.io/started-by: olg
+spec:
+  serviceAccountName: pipeline
+  pipelineRef:
+    name: fargate-controller-pipeline
+  params:
+    - name: git-revision
+      value: "main"
+    - name: git-url
+      value: 'https://github.com/zerog92/aws-controllers-k8s.git'
+  workspaces:
+    - name: shared-workspace
+      volumeClaimTemplate:
+        metadata:
+          name: ws-pvc
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 1Gi

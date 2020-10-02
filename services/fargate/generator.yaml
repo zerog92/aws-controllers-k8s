@@ -1,0 +1,13 @@
+resources:
+  Cluster:
+    renames:
+      operations:
+        CreateCluster:
+          input_fields:
+            Cluster: Name
+        DeleteCluster:
+          input_fields:
+            Cluster: Name
+    list_operation:
+      match_fields:
+        - Name

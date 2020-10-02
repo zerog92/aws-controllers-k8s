@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-fargate-controller-task
+spec:
+  steps:
+    - script: |
+        #! /bin/sh
+        pwd
+        go build -a -o bin/fargate-controller services/fargate/cmd/controller/main.go
+        echo -----------------------------------
+      image: 'quay.io/openshift/golang:1.14.1'
+      name: build-fargate-controller-task
+      resources: {}
+      workingDir: /workspace/shared-workspace
+  workspaces:
+    - name: shared-workspace

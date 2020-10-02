@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-fargate-controller-container-task
+spec:
+  steps:
+    - args:
+        - |-
+          pwd
+          oc start-build fargate-controller-container --from-dir . --follow
+          echo -----------------------------------
+      command:
+        - /bin/sh
+        - '-c'
+      image: 'quay.io/openshift/origin-cli:latest'
+      name: build-fargate-controller-container-task
+      resources: {}
+      workingDir: /workspace/shared-workspace
+  workspaces:
+    - name: shared-workspace
