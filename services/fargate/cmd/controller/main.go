@@ -6,6 +6,7 @@ import (
 	"os"
 	ctrlrt "sigs.k8s.io/controller-runtime"
 	flag "github.com/spf13/pflag"
+	svcresource "github.com/aws/aws-controllers-k8s/services/fargate/pkg/resource"
 )
 
 var (
@@ -50,9 +51,21 @@ func main() {
 	setupLog.Info(
 		"initializing service controller",
 		"aws.service", awsServiceAlias,
-		"mgr", mgr,
 	)
-
+	sc := ackrt.NewServiceController(
+		awsServiceAlias, awsServiceAPIGroup,
+	).WithLogger(
+		ctrlrt.Log,
+	).WithResourceManagerFactories(
+		svcresource.GetManagerFactories(),
+	)
+	if err = sc.BindControllerManager(mgr, ackCfg); err != nil {
+		setupLog.Error(
+			err, "unable bind to controller manager to service controller",
+			"aws.service", awsServiceAlias,
+		)
+		os.Exit(1)
+	}
 
 	setupLog.Info(
 		"starting manager",
