@@ -19,6 +19,17 @@ type resource struct {
 // identifying information, including the AWS account ID that owns the
 // resource, the resource's AWS Resource Name (ARN)
 func (r *resource) Identifiers() acktypes.AWSResourceIdentifiers {
+	owner := ackv1alpha1.AWSAccountID(string(""))
+	arn := ackv1alpha1.AWSResourceName(string(""))
+	meta := ackv1alpha1.ResourceMetadata {
+		ARN:            &arn,
+		OwnerAccountID: &owner,
+	}
+	if r.ko.Status.ACKResourceMetadata == nil {
+		return &resourceIdentifiers{
+			meta: &meta,
+		}
+	}
 	return &resourceIdentifiers{r.ko.Status.ACKResourceMetadata}
 }
 
