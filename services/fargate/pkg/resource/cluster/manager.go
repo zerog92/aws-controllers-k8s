@@ -8,6 +8,11 @@ import (
 	acktypes "github.com/aws/aws-controllers-k8s/pkg/types"
 	"github.com/aws/aws-sdk-go/aws/session"
 	svcsdk "github.com/aws/aws-sdk-go/service/ecs"
+	ctrlrt "sigs.k8s.io/controller-runtime"
+)
+
+var (
+	managerLog           = ctrlrt.Log.WithName("manager")
 )
 
 // resourceManager is responsible for providing a consistent way to perform
@@ -64,6 +69,7 @@ func (rm *resourceManager) Create(
 	ctx context.Context,
 	res acktypes.AWSResource,
 ) (acktypes.AWSResource, error) {
+	managerLog.Info("Create resource")
 	r := rm.concreteResource(res)
 	if r.ko == nil {
 		// Should never happen... if it does, it's buggy code.
@@ -90,6 +96,7 @@ func (rm *resourceManager) Update(
 	resLatest acktypes.AWSResource,
 	diffReporter *ackcompare.Reporter,
 ) (acktypes.AWSResource, error) {
+	managerLog.Info("Update resource")
 	desired := rm.concreteResource(resDesired)
 	latest := rm.concreteResource(resLatest)
 	if desired.ko == nil || latest.ko == nil {
@@ -109,6 +116,8 @@ func (rm *resourceManager) Delete(
 	ctx context.Context,
 	res acktypes.AWSResource,
 ) error {
+	managerLog.Info("Delete resource")
+
 	r := rm.concreteResource(res)
 	if r.ko == nil {
 		// Should never happen... if it does, it's buggy code.

@@ -3,7 +3,7 @@ package cluster
 import (
 	ackv1alpha1 "github.com/aws/aws-controllers-k8s/apis/core/v1alpha1"
 	acktypes "github.com/aws/aws-controllers-k8s/pkg/types"
-	svcapitypes "github.com/aws/aws-controllers-k8s/services/s3/apis/v1alpha1"
+	svcapitypes "github.com/aws/aws-controllers-k8s/services/fargate/apis/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	k8srt "k8s.io/apimachinery/pkg/runtime"
 )
@@ -12,7 +12,7 @@ import (
 // interface
 type resource struct {
 	// The Kubernetes-native CR representing the resource
-	ko *svcapitypes.Bucket
+	ko *svcapitypes.Cluster
 }
 
 // Identifiers returns an AWSResourceIdentifiers object containing various
