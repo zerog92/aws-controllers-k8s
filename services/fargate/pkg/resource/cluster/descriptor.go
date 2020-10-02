@@ -78,6 +78,9 @@ func (d *resourceDescriptor) Diff(
 	ac := a.(*resource)
 	bc := b.(*resource)
 	var diffReporter ackcompare.Reporter
+	if ac == nil || bc == nil {
+		return &diffReporter
+	}
 	cmp.Equal(ac.ko, bc.ko, cmp.Reporter(&diffReporter), cmp.AllowUnexported(svcapitypes.Cluster{}))
 	return &diffReporter
 }
