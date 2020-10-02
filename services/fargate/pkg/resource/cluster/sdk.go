@@ -3,7 +3,13 @@ package cluster
 import (
 	"context"
 	ackcompare "github.com/aws/aws-controllers-k8s/pkg/compare"
+	ctrlrt "sigs.k8s.io/controller-runtime"
 )
+
+var (
+	sdkLog           = ctrlrt.Log.WithName("sdk")
+)
+
 
 // sdkFind returns SDK-specific information about a supplied resource
 func (rm *resourceManager) sdkFind(
@@ -11,7 +17,7 @@ func (rm *resourceManager) sdkFind(
 	r *resource,
 ) (*resource, error) {
 
-	println("sdkFind")
+	sdkLog.Info("sdkFind")
 	return nil, nil
 }
 
@@ -21,7 +27,7 @@ func (rm *resourceManager) sdkCreate(
 	ctx context.Context,
 	r *resource,
 ) (*resource, error) {
-	println("sdkCreate")
+	sdkLog.Info("sdkCreate")
 
 	return nil, nil
 }
@@ -35,7 +41,7 @@ func (rm *resourceManager) sdkUpdate(
 	diffReporter *ackcompare.Reporter,
 ) (*resource, error) {
 	// TODO(jaypipes): Figure this out...
-	println("sdkUpdate")
+	sdkLog.Info("sdkUpdate")
 
 	return nil, nil
 }
@@ -45,6 +51,6 @@ func (rm *resourceManager) sdkDelete(
 	ctx context.Context,
 	r *resource,
 ) error {
-	println("sdkDelete")
+	sdkLog.Info("sdkDelete")
 	return nil
 }

@@ -3,12 +3,11 @@ package cluster
 import (
 	"context"
 	"fmt"
-
 	ackv1alpha1 "github.com/aws/aws-controllers-k8s/apis/core/v1alpha1"
 	ackcompare "github.com/aws/aws-controllers-k8s/pkg/compare"
 	acktypes "github.com/aws/aws-controllers-k8s/pkg/types"
-	svcsdk "github.com/aws/aws-sdk-go/service/ecs"
 	"github.com/aws/aws-sdk-go/aws/session"
+	svcsdk "github.com/aws/aws-sdk-go/service/ecs"
 )
 
 // resourceManager is responsible for providing a consistent way to perform
