@@ -30,7 +30,10 @@ func (r *resource) Identifiers() acktypes.AWSResourceIdentifiers {
 			meta: &meta,
 		}
 	}
-	return &resourceIdentifiers{r.ko.Status.ACKResourceMetadata}
+	//return &resourceIdentifiers{r.ko.Status.ACKResourceMetadata}
+	return &resourceIdentifiers{
+		meta: &meta,
+	}
 }
 
 // IsBeingDeleted returns true if the Kubernetes resource has a non-zero
