@@ -2,7 +2,9 @@ FROM amazonlinux:2
 
 WORKDIR /
 
-COPY controller /bin/controller
+RUN ls -la
+
+COPY bin/fargate-controller /bin/controller
 
 ENTRYPOINT ["/bin/controller"]
 
