@@ -102,6 +102,9 @@ func (rm *resourceManager) Update(
 	}
 	desired := rm.concreteResource(resDesired)
 	latest := rm.concreteResource(resLatest)
+	if desired == nil || latest == nil {
+		return nil, nil
+	}
 	if desired.ko == nil || latest.ko == nil {
 		// Should never happen... if it does, it's buggy code.
 		panic("resource manager's Update() method received resource with nil CR object")
