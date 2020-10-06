@@ -16,9 +16,11 @@ func (rm *resourceManager) sdkFind(
 	ctx context.Context,
 	r *resource,
 ) (*resource, error) {
-
 	sdkLog.Info("sdkFind")
-	return nil, nil
+
+	ko := r.ko.DeepCopy()
+
+	return &resource{ko}, nil
 }
 
 // sdkCreate creates the supplied resource in the backend AWS service API and
