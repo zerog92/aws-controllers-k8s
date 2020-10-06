@@ -20,6 +20,8 @@ func (rm *resourceManager) sdkFind(
 
 	ko := r.ko.DeepCopy()
 
+	sdkLog.Info("sdkFind", "ko", ko)
+
 	return &resource{ko}, nil
 }
 
